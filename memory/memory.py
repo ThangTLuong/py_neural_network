@@ -1,6 +1,5 @@
 import json
 
-
 class Memory():
   def __init__(self, file_path: str) -> None:
     self._memory: dict | None = None
@@ -15,9 +14,3 @@ class Memory():
   def save_memory(self) -> None:
     with open(self._file_path, 'w') as file:
       json.dump(self._memory, file, indent=2)
-
-
-def main(args=None):
-  mem = Memory('memory.json')
-  mem.load_memory()
-  mem.save_memory()
