@@ -1,5 +1,21 @@
+import random
+import pickle
+import numpy as np
+import nltk
+from memory import Memory_Handler as mh
+
+from keras.models import Sequential
+from nltk.stem import WordNetLemmatizer
+from keras.layers import Dense, Activation, Dropout
+from keras.optimizers import SGD
+
 class Virtual_Machine():
   def __init__(self) -> None:
+    self._ignore_letters: list[str] = ['?', '!', '.', ',']
+    self._lemmatizer: WordNetLemmatizer = WordNetLemmatizer()
+    self._words = []
+    self._classes = []
+    
     self._is_running: bool = False
   
   def start(self) -> None:
@@ -8,7 +24,7 @@ class Virtual_Machine():
     while self._is_running:
       user_input = input('>>> ')
       
-      if user_input == 'goodbye':
+      if user_input.lower() == 'goodbye':
         print('Good bye...')
         break
       
